@@ -1,0 +1,107 @@
+(require 'package) ;; You might already have this line
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize) ;; You might already have this line
+
+(add-to-list 'load-path
+                "~/.emacs.d/elpa/yasnippet-20151101.1535/")
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;; auto-complete
+(require 'auto-complete)
+(global-auto-complete-mode t)
+(define-key ac-complete-mode-map "\C-n" 'ac-next)
+(define-key ac-complete-mode-map "\C-p" 'ac-previous)
+
+;; python コード補完
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+
+(projectile-global-mode)
+(require 'helm-projectile)
+;; プロジェクトに関連するファイルをhelm-for-filesに追加
+(defadvice helm-for-files (around update-helm-list activate)
+  (let ((helm-for-files-preferred-list
+         (helm-for-files-update-list)))
+    ad-do-it))
+
+(defun helm-for-files-update-list ()
+  `(helm-source-buffers-list
+    helm-source-recentf
+    helm-source-ghq
+    helm-source-files-in-current-dir
+    helm-source-file-cache
+    ,(if (projectile-project-p)
+     helm-source-projectile-files-list)))
+
+;; helm-agをプロジェクトルートから
+(defun projectile-helm-ag ()
+  (interactive)
+  (helm-ag (projectile-project-root)))
+
+(global-git-gutter-mode t)
+(setq git-gutter:added-sign "++")
+(setq git-gutter:deleted-sign-sign "--")
+(setq git-gutter:modified-sign "==")
+(set-face-foreground 'git-gutter:added  "green")
+(set-face-foreground 'git-gutter:deleted  "yellow")
+(set-face-background 'git-gutter:modified "magenta")
+
+;; コントロール用のバッファを同一フレーム内に表示
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+;; diffのバッファを上下ではなく左右に並べる
+(setq ediff-split-window-function 'split-window-horizontally)aaa
+
+;; 初期画面をスクラッチに
+(setq inhibit-startup-message t)
+
+;; タブ幅
+(setq default-tab-width 4)
+
+;; C-hでバックスペース
+(keyboard-translate ?\C-h ?\C-?)
+
+;; メニューバーを消す
+(menu-bar-mode -1)
+
+;;; 対応する括弧を光らせる。
+(show-paren-mode 1)
+
+;;; カーソルの位置が何行目かを表示する
+(line-number-mode t)
+(global-set-key [f6] 'linum-mode)
+(setq linum-format "%4d ")
+
+;;; バックアップファイルを作らない
+(setq backup-inhibited t)
+
+;;; 終了時にオートセーブファイルを消す
+(setq delete-auto-save-files t)
+
+;;; 補完時に大文字小文字を区別しない
+(setq completion-ignore-case t)
+(setq read-file-name-completion-ignore-case t)
+
+;; タイトルバーに日時を表示する
+(setq display-time-day-and-date t
+      display-time-24hr-format t)
+(setq display-time-string-forms
+      '((if display-time-day-and-date
+			        (format "%s/%s/%s " year month day)
+		        "")
+		(format "%s:%s%s"
+				(if display-time-24hr-format 24-hours 12-hours)
+				minutes
+				(if display-time-24hr-format "" am-pm))))
+(display-time)
+(cond (window-system
+       (setq frame-title-format
+			            '((multiple-frames "")
+						              display-time-string))
+       (remove-hook 'global-mode-string 'display-time-string)))
+
+(global-font-lock-mode t)
