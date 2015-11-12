@@ -1,1 +1,1 @@
-("~/workspace/python/")
+("~/workspace/python/" "~/.emacs.d/")
