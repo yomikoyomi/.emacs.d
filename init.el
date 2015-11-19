@@ -144,14 +144,14 @@
 (set-face-background 'highlight-indentation-face "#e3e3d3")
 (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
 
-(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-(add-hook 'python-mode-hook
-          (lambda ()
-            (define-key python-mode-map "\"" 'electric-pair)
-            (define-key python-mode-map "\'" 'electric-pair)
-            (define-key python-mode-map "(" 'electric-pair)
-            (define-key python-mode-map "[" 'electric-pair)
-            (define-key python-mode-map "{" 'electric-pair)))
+;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+;(add-hook 'python-mode-hook
+;          (lambda ()
+;            (define-key python-mode-map "\"" 'electric-pair)
+;            (define-key python-mode-map "\'" 'electric-pair)
+;            (define-key python-mode-map "(" 'electric-pair)
+;            (define-key python-mode-map "[" 'electric-pair)
+;            (define-key python-mode-map "{" 'electric-pair)))
 (defun electric-pair ()
   "Insert character pair without sournding spaces"
   (interactive)
