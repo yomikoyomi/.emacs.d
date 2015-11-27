@@ -52,19 +52,28 @@
   (helm-ag (projectile-project-root)))
 
 ;; git
-;(require 'magit)
+(require 'magit)
 
-(global-git-gutter-mode t)
-(setq git-gutter:added-sign "++")
-(setq git-gutter:deleted-sign-sign "--")
-(setq git-gutter:modified-sign "==")
-(set-face-foreground 'git-gutter:added  "green")
-(set-face-foreground 'git-gutter:deleted  "yellow")
-(set-face-background 'git-gutter:modified "magenta")
+(set-face-foreground 'magit-hash "black") ;リビジョン
+(set-face-background 'magit-diff-hunk-heading "grey")
+(set-face-background 'magit-diff-hunk-heading-highlight "grey")
+(set-face-background 'magit-diff-added "grey")
+(set-face-background 'magit-diff-added-highlight "grey")
+(set-face-background 'magit-diff-removed "grey")
+(set-face-background 'magit-diff-removed-highlight "grey")
+
+;;(global-git-gutter-mode t)
+;;(setq git-gutter:added-sign "++")
+;;(setq git-gutter:deleted-sign-sign "--")
+;;(setq git-gutter:modified-sign "==")
+;;(set-face-foreground 'git-gutter:added  "green")
+;;(set-face-foreground 'git-gutter:deleted  "yellow")
+;;(set-face-background 'git-gutter:modified "magenta")
 
 (require 'multi-term)
 (setq multi-term-program shell-file-name)
 
+(global-linum-mode t)
 ;; コントロール用のバッファを同一フレーム内に表示
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 ;; diffのバッファを上下ではなく左右に並べる
