@@ -178,3 +178,17 @@
 ;;(add-hook 'python-mode-hook
 ;;          (lambda ()
 ;;            (flymake-mode t)))
+
+(autoload 'ruby-mode "ruby-mode"
+  "Mode for editing ruby source files" t)
+(add-to-list 'auto-mode-alist '("\\.rb$latex " . ruby-mode))
+(add-to-list 'auto-mode-alist '("Capfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
+
+;;;; for ctags.el
+(require 'ctags nil t)
+(setq tags-revert-without-query t)
+(setq ctags-command "ctags-exuberant -R --fields=\"+afikKlmnsSzt\" ")
+(global-set-key (kbd "<f5>") 'ctags-create-or-update-tags-table)
+(global-set-key (kbd "M-.") 'ctags-search)
+
