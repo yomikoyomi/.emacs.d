@@ -1,1 +1,1 @@
-("~/.emacs.d/" "~/workspace/testRails2/" "~/workspace/railsTest/" "~/workspace/python/" "~/tmp/hengband-1.6.2/")
+("~/.emacs.d/" "~/workspace/python/" "~/workspace/testRails2/" "~/workspace/railsTest/" "~/tmp/hengband-1.6.2/")

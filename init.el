@@ -1,3 +1,6 @@
+;;; package --- Summary
+;;; Commentary:
+;;;  Code:
 ;; load-pathの追加関数
 (defun add-to-load-path (&rest paths)
   (let (path)
@@ -132,19 +135,19 @@
 ;;
 ;; whitespace
 ;;
-(require 'whitespace)
-(setq whitespace-style '(face           ; faceで可視化
-						 trailing       ; 行末
-						 tabs           ; タブ
-						 empty          ; 先頭/末尾の空行
-						 space-mark     ; 表示のマッピング
-						 tab-mark
-						 ))
+;(require 'whitespace)
+;(setq whitespace-style '(face           ; faceで可視化
+;						 trailing       ; 行末
+;						 tabs           ; タブ
+;						 empty          ; 先頭/末尾の空行
+;						 space-mark     ; 表示のマッピング
+;						 tab-mark
+;						 ))
 
-(setq whitespace-display-mappings
-	  '((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
+;(setq whitespace-display-mappings
+;	  '((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
 
-(global-whitespace-mode 1)
+;(global-whitespace-mode 1)
 
 
 ;; python-mode hack
@@ -187,6 +190,9 @@
 ;;(add-hook 'python-mode-hook
 ;;          (lambda ()
 ;;            (flymake-mode t)))
+
+;;flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 (autoload 'ruby-mode "ruby-mode"
   "Mode for editing ruby source files" t)
