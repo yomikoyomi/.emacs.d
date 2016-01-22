@@ -23,6 +23,10 @@
 (yas-global-mode 1)
 
 ;; auto-complete
+;(add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-20150618.1949")
+;(require 'auto-complete-config)
+;(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20150618.1949/dict")
+;(ac-config-default)
 (require 'auto-complete)
 (global-auto-complete-mode t)
 (define-key ac-complete-mode-map "\C-n" 'ac-next)
@@ -31,6 +35,11 @@
 ;; python コード補完
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
+
+; auto-java-complete
+(add-to-list 'load-path "~/.emacs.d/auto-java-complete")
+(require 'ajc-java-complete-config)
+(add-hook 'java-mode-hook 'ajc-java-complete-mode)
 
 (projectile-global-mode)
 (require 'helm-projectile)
@@ -197,7 +206,7 @@
 ;;            (flymake-mode t)))
 
 ;;flycheck
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;;(add-hook 'after-init-hook #'global-flycheck-mode)
 
 (autoload 'ruby-mode "ruby-mode"
   "Mode for editing ruby source files" t)
